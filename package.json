@@ -5,14 +5,12 @@
   "scripts": {
     "start": "node ./bin/www"
   },
-  "dependecnies": {
-    "express": "~4.12.2"
-  },
   "description": "A simple ticketing system for events",
   "main": "app.js",
   "author": "Matthew Revell",
   "license": "Apache 2.0",
   "dependencies": {
-    "express": "^4.12.3"
+    "express": "^4.12.3",
+    "jade": "^1.9.2"
   }
 }
