@@ -7,5 +7,12 @@
   },
   "dependecnies": {
     "express": "~4.12.2"
+  },
+  "description": "A simple ticketing system for events",
+  "main": "app.js",
+  "author": "Matthew Revell",
+  "license": "Apache 2.0",
+  "dependencies": {
+    "express": "^4.12.3"
   }
 }
