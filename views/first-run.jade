@@ -1,0 +1,15 @@
+html
+  head
+    title First-run config set-up: Ticketyboo
+  body
+    h1 Set-up Ticketyboo for the first time
+    p It looks as though this is the first time you've run Ticketyboo. Either that or there has been an error reading the config document from the database.
+    h2 About you
+    form(action='/first-run', method='post')
+      label(for='name') Your name: 
+        input(id='name', type='text', value='', placeholder='', name='name')
+      br
+      label(for='email') Your email address: 
+        input(id='email', type='text', value='', placeholder='', name='email')
+    
+      input(type='submit', value='Register')
