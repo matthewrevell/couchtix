@@ -48,7 +48,7 @@ app.post('/first-run', urlEncodedParser, function(req, res) {
     return res.sendStatus(400);
   } else {
     adminUser = new User(req.body.name, req.body.email);
-    adminUser.save;
+    adminUser.save();
     console.log(adminUser.email);
     res.render('first-run-confirm', adminUser);
 
