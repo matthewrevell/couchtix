@@ -29,7 +29,9 @@ app.get('/', function(req, res) {
   // Load the event details
   event.load(cb, function getTicketIndex(err, eventDetail) {
     tickets.loadIndex(cb, function(err, ticketIndex) {
-      res.render('index', { eventDetails: eventDetail, ticketList: ticketIndex });
+      tickets.loadEach(cb, ticketIndex, function(err, ticketDetails) {
+        res.render('index', { eventDetails: eventDetail, ticketList: ticketIndex, ticketDetails: ticketDetails });
+      });
     });
   });
 });

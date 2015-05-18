@@ -14,6 +14,20 @@ module.exports.loadIndex = function(cb, callback) {
   });
 }
 
+module.exports.loadEach = function(cb, ticketIndex, callback) {
+  this.cb = cb;
+  console.log(ticketIndex);
+  for (var ticket in ticketIndex) {
+    console.log("INSIDE THE LOOP HERE!")
+    console.log(ticketIndex[ticket]);
+    cb.get("t::"+ticketIndex[ticket], function (err, response) {
+      if (err) throw err;
+      console.log("TICKET: " + JSON.stringify(response));
+      callback(null, response); // build array of callbacks and then return that
+    });
+  }
+}
+
 //#  this.cb = cb;
 //#module.exports.loadTickets = function(cb, callback) {
 //#  cb.get(ticketIndex, function(err, response) {
