@@ -20,14 +20,17 @@ var urlEncodedParser = bodyParser.urlencoded({ extended: false });
 
 // Load our models
 var event = require('./models/event.js');
+var tickets = require('./models/ticket.js');
 
 // Define our basic routes
 
 // The home page lists the tickets available and lets us obtain one
 app.get('/', function(req, res) {
   // Load the event details
-  event.load(cb, function(eventDetail) {
-    res.render('index', { details: eventDetail });
+  event.load(cb, function getTicketIndex(err, eventDetail) {
+    tickets.loadIndex(cb, function(err, ticketIndex) {
+      res.render('index', { eventDetails: eventDetail, ticketList: ticketIndex });
+    });
   });
 });
 

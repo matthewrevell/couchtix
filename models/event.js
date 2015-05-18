@@ -6,7 +6,12 @@ var eventKey = keyPrefix + "event";
 var eventDetails = {
 	"name":  "",
 	"url": "",
-	"description": ""
+	"description": "",
+	"live": false,
+	"eventDate": "",
+	"onSale": "",
+	"offSale": "",
+	"type": "event"
 }
 
 
@@ -15,12 +20,8 @@ var eventDetails = {
 module.exports.load = function (cb, callback) {
 	this.cb = cb;
 	cb.get(eventKey, function(err, response) {
-		if (err) {
-			console.log("OMG! " + err)
-			return false;
-		} else {
-			callback(response.value);
-		}
+		if (err) throw err;
+		callback(null, response.value);
 	});
 }
 

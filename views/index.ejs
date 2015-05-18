@@ -13,8 +13,23 @@
     </head>
     
     <body>
-        <h1><%= details['name'] %></h1>
-        <p>Tickets available today!</p>
+        <h1><%= eventDetails['name'] %></h1>
+        <h2><%= eventDetails['description'] %></h2>
+        <% var onSaleDate = Date.parse(eventDetails['onSale']); %>
+        <% var offSaleDate = Date.parse(eventDetails['offSale']); %>
+        <% if (eventDetails['live'] === true && onSaleDate <= Date.now() && offSaleDate >= Date.now()) { %>
+            <h3>Ticket types available</h3>
+            <ul>
+                <% for (var ticket in ticketList) { %>
+                    <li> <%= ticketList[ticket] %> </li>
+                 <% } %>
+            </ul>
+        <% } else { %>
+            <p>Tickets not on sale today.</p>
+         <% } %>
+             
+         <%= "Ticket list:" + ticketList %>
+        
     </body>
 </html>
     
