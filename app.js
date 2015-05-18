@@ -8,6 +8,9 @@ var couchbase = require('couchbase');
 var cluster = new couchbase.Cluster(cbLocation);
 var cb = cluster.openBucket(cbBucket);
 
+//Other libraries
+var async = require('async');
+
 // Basic set-up for our Express app, using the Jade templating engine
 var express = require('express');
 var app = express();

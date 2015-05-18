@@ -23,7 +23,7 @@ module.exports.loadEach = function(cb, ticketIndex, callback) {
     cb.get("t::"+ticketIndex[ticket], function (err, response) {
       if (err) throw err;
       console.log("TICKET: " + JSON.stringify(response));
-      callback(null, response); // build array of callbacks and then return that
+      callback(null, response); // here even just iterating over a list of documents to get means we have to deal with several callbacks in one go
     });
   }
 }
