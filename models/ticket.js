@@ -25,29 +25,4 @@ module.exports.loadEach = function(cb, ticketIndex, callback) {
       console.log("TICKET: " + JSON.stringify(response));
       callback(null, response);
     });
-}  
- 
-  
-  
-  
-  
-
-//#  this.cb = cb;
-//#module.exports.loadTickets = function(cb, callback) {
-//#  cb.get(ticketIndex, function(err, response) {
-//#    if (err) throw err;
-//#    callback(null, response.value);
-//#  });
-//#}
-
-
-
-
-
-
-function Ticket(name, code, description, quantity, live, startDate, endDate) {
-  this.name = name;
-  this.code = code;
-  this.quantity = quantity;
-  this.admin = admin;
-};
+}
