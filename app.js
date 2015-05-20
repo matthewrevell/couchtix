@@ -15,9 +15,10 @@ var app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-// And bodyParser to handle our form input
+// Load third party libs
 var bodyParser = require('body-parser');
 var urlEncodedParser = bodyParser.urlencoded({ extended: false });
+require('express-helpers')(app);
 
 // Load our models
 var event = require('./models/event.js');

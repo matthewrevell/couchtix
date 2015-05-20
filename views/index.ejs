@@ -44,7 +44,7 @@
 		      	<span class="list-group-item active">Tickets available today</span>
                 <% for (var ticket in ticketDetails) { %>
                     <div class="list-group-item">
-				        <span class="badge"><%= ticketDetails[ticket]["quantity"] %></span><%= ticketDetails[ticket]["name"] %>
+				        <span class="badge"><%= ticketDetails[ticket]["quantity"] %></span><%- link_to(ticketDetails[ticket]["name"], '/'+ticketDetails[ticket]['link']) %>
 				    </div> 
 
                  <% } %>      
@@ -59,12 +59,7 @@
 </div>
 </div>
 </div>
-        
- 
-            
-    	<%= JSON.stringify(ticketDetails); %>
-        <%= JSON.stringify(userDoc); %>
-        
+
     </body>
 </html>
     
