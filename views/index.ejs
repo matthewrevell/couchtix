@@ -9,24 +9,59 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     
     <body>
-        <h1><%= eventDetails['name'] %></h1>
-        <h2><%= eventDetails['description'] %></h2>
-        <% var onSaleDate = Date.parse(eventDetails['onSale']); %>
+        
+    <div class="container">
+	   <div class="row clearfix">
+		<div class="col-md-12 column">
+		  <ul class="nav nav-tabs">
+			<li class="active">
+				<a href="/">Home</a>
+			</li>
+			<li>
+				<a href="#">Profile</a>
+			</li>
+		</ul>
+		<div class="jumbotron">
+		  <h1>
+			<%= eventDetails['name'] %>
+		</h1>
+		<p>
+		  <%= eventDetails['description'] %>
+		</p>
+	</div>
+    
+    <% var onSaleDate = Date.parse(eventDetails['onSale']); %>
         <% var offSaleDate = Date.parse(eventDetails['offSale']); %>
-        <% if (eventDetails['live'] === true && onSaleDate <= Date.now() && offSaleDate >= Date.now()) { %>
-            <h3>Ticket types available</h3>
-            <ul>
-                <% for (var ticket in ticketList) { %>
-                    <li> <%= ticketList[ticket] %> </li>
-                 <% } %>
-            </ul>
+        <% if (eventDetails['live'] === true && onSaleDate <= Date.now() && offSaleDate >= Date.now()) { %>      
+        <div class="row clearfix">
+            <div class="col-md-12 column">  
+			 <div class="list-group">
+		      	<span class="list-group-item active">Tickets available today</span>
+                <% for (var ticket in ticketDetails) { %>
+                    <div class="list-group-item">
+				        <span class="badge"><%= ticketDetails[ticket]["quantity"] %></span><%= ticketDetails[ticket]["name"] %>
+				    </div> 
+
+                 <% } %>      
+                
+                <a class="list-group-item active"><span class="badge">14</span>Help</a>
+			</div>
+		</div>
         <% } else { %>
-            <p>Tickets not on sale today.</p>
-         <% } %>
+            <h3>No tickets available right now.</h3>
+        <% } %>
+    </div>
+</div>
+</div>
+</div>
+        
+ 
+            
     	<%= JSON.stringify(ticketDetails); %>
         <%= JSON.stringify(userDoc); %>
         

@@ -3,6 +3,17 @@
 var keyPrefix = "t::";
 var ticketIndexDoc = keyPrefix + "index";
 
+var loadDetails = function(ticketObj) {
+  console.log("NOW IN LOADDETAILS");
+  var ticketDetails = [];
+  console.log(JSON.stringify(ticketObj));
+  for (var ticket in ticketObj) {
+    ticketDetails.push(ticket['value']);
+  }
+  return ticketDetails;
+}
+
+
 // Public
 
 module.exports.loadIndex = function(cb, callback) {
@@ -16,13 +27,20 @@ module.exports.loadIndex = function(cb, callback) {
 
 module.exports.loadEach = function(cb, ticketIndex, callback) {
   this.cb = cb;
-  console.log(ticketIndex);
   for (var i = 0; i < ticketIndex.length; i++) {
     ticketIndex[i] = "t::" + ticketIndex[i];
+    console.log("ticketIndex[i]: " + ticketIndex[i]);
   }
-  cb.getMulti(ticketIndex, function (err, response) {
+    cb.getMulti(ticketIndex, function (err, response) {
       if (err) throw err;
-      console.log("TICKET: " + JSON.stringify(response));
-      callback(null, response);
+      var details = [];
+      for (var ticket in response) {
+        details.push(response[ticket]["value"]);
+      } 
+      for (var i in details) {
+        console.log(details[i]);
+      }
+      callback(null, details);
     });
 }
+
