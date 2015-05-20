@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Couchtix</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    
+    <body>
+        
+    <div class="container">
+	   <div class="row clearfix">
+		    <div class="col-md-12 column">
+		      <ul class="nav nav-tabs">
+			     <li class="active">
+				    <a href="/">Home</a>
+			     </li>
+			     <li>
+				    <a href="#">Profile</a>
+			     </li>
+		      </ul>
+		      <div class="jumbotron">
+		        <h1>
+			       <%= eventDetails['name'] %>
+		        </h1>
+		        <p>
+		         <%= eventDetails['description'] %>
+		       </p>
+	       </div> <!--Jumbotron ends -->
+         <h3>
+           <%= ticketDetails["name"] %> ticket
+         </h3>
+         <p><%= ticketDetails['description'] %></p>
+         <p>Only <%= ticketDetails['quantity'] %> left!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+ </body>
+</html>
+    

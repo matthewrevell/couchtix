@@ -7,7 +7,7 @@ var cbBucket = config.get('Database.bucket');
 var couchbase = require('couchbase');
 var cluster = new couchbase.Cluster(cbLocation);
 var cb = cluster.openBucket(cbBucket);
-
+var ViewQuery = couchbase.ViewQuery;
 
 // Basic set-up for our Express app, using the Jade templating engine
 var express = require('express');
@@ -15,7 +15,7 @@ var app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-// Load third party libs
+// Load third-party libs
 var bodyParser = require('body-parser');
 var urlEncodedParser = bodyParser.urlencoded({ extended: false });
 require('express-helpers')(app);
@@ -41,6 +41,17 @@ app.get('/', function(req, res) {
   });
 });
 
+app.get('/:ticket', function(req, res) {
+  event.load(cb, function getTicketIndex(err, eventDetail) {
+    tickets.loadOne(cb, ViewQuery, req.params.ticket, false, function(err, ticketDetails) {
+        user.load(cb, "matthewrevell", function(err, userDoc) {
+          res.render('ticket-page', { eventDetails: eventDetail, ticketDetails: ticketDetails, userDoc: userDoc });
+        });
+      });
+    });
+});
+
+
 app.listen(3000, function() {
-  console.log('Ticketyboo listening on port 3000');
+  console.log('Couchtix listening on port 3000');
 });

@@ -1,3 +1,5 @@
+
+
 // Private
 
 var keyPrefix = "t::";
@@ -44,16 +46,33 @@ module.exports.loadEach = function(cb, ticketIndex, callback) {
     cb.getMulti(ticketIndex, function (err, response) {
       if (err) throw err;
       var details = [];
+      // XXX: Refactor so this is a private function for re-use
       for (var ticket in response) {
         var thisTicket = response[ticket]['value'];
         thisTicket['link'] = ticketLink(thisTicket['name']);
         details.push(thisTicket);
         console.log(JSON.stringify(thisTicket));
       } 
-      for (var i in details) {
-        console.log(details[i]);
-      }
       callback(null, details);
     });
 }
 
+module.exports.loadOne = function(cb, ViewQuery, ticketName, kv, callback) {
+  // If this is a view query, do that stuff
+  var ticketKey;
+  if (kv === false) {
+    var query = ViewQuery.from('couchtix', 'by_link');
+    cb.query(query, function (err, results) {
+      for (i in results) {
+        console.log("results[i]: " + JSON.stringify(results[i]));
+        if (results[i]['value'] === ticketName) {
+          ticketKey = "t::" + results[i]['value'];
+          console.log("The key is " + ticketKey);
+        }
+        
+      }
+    });
+  } else {
+    ticketKey = "t::" + ticketName;
+  }
+}
