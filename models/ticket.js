@@ -1,4 +1,4 @@
-
+var async = require('async');
 
 // Private
 
@@ -57,22 +57,31 @@ module.exports.loadEach = function(cb, ticketIndex, callback) {
     });
 }
 
-module.exports.loadOne = function(cb, ViewQuery, ticketName, kv, callback) {
-  // If this is a view query, do that stuff
+module.exports.loadOne = function(cb, ViewQuery, ticketName, callback) {
   var ticketKey;
-  if (kv === false) {
-    var query = ViewQuery.from('couchtix', 'by_link');
-    cb.query(query, function (err, results) {
-      for (i in results) {
-        console.log("results[i]: " + JSON.stringify(results[i]));
-        if (results[i]['value'] === ticketName) {
-          ticketKey = "t::" + results[i]['value'];
-          console.log("The key is " + ticketKey);
+  var query = ViewQuery.from('couchtix', 'by_link');
+  cb.query(query, function(err, results){
+    var queryCounter = 0;
+    console.log("IN THE QUERY");
+     for (var i in results) {
+        if (results[i].key === ticketName) {
+          console.log("the results === ticketname");
+          ticketKey = results[i].value;
         }
-        
+        console.log("ticketKey " + ticketKey);
+        queryCounter++;
+        console.log(queryCounter);
       }
-    });
-  } else {
-    ticketKey = "t::" + ticketName;
-  }
+    if (queryCounter === results.length) {
+      console.log("IN THE GET " + ticketKey);
+      cb.get(ticketKey, function(err, response) {
+        if (err) throw err;
+        console.log(response);
+        callback(null, response.value);
+      });
+    }
+     
+    
+  });
+  
 }

@@ -43,7 +43,7 @@ app.get('/', function(req, res) {
 
 app.get('/:ticket', function(req, res) {
   event.load(cb, function getTicketIndex(err, eventDetail) {
-    tickets.loadOne(cb, ViewQuery, req.params.ticket, false, function(err, ticketDetails) {
+    tickets.loadOne(cb, ViewQuery, req.params.ticket, function(err, ticketDetails) {
         user.load(cb, "matthewrevell", function(err, userDoc) {
           res.render('ticket-page', { eventDetails: eventDetail, ticketDetails: ticketDetails, userDoc: userDoc });
         });
